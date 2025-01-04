@@ -35,7 +35,8 @@ public:
 	TodListNode<T>*		mPrev;
 };
 
-template <typename T> class TodList
+template <typename T>
+class TodList
 {
 public:
 	TodListNode<T>*		mHead;
@@ -44,7 +45,7 @@ public:
 	TodAllocator*		mpAllocator;
 
 public:
-    TodList<T>()
+    TodList()
     {
         mHead = nullptr;
         mTail = nullptr;
@@ -52,7 +53,7 @@ public:
         mpAllocator = nullptr;
     }
 
-    ~TodList<T>()
+    ~TodList()
     {
         RemoveAll();
     }

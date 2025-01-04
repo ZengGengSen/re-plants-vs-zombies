@@ -3,7 +3,7 @@
 #define NOMINMAX 1
 #include <windows.h>
 #include "ImageLib.h"
-#include "png/png.h"
+#include "png.h"
 #include <math.h>
 #include <tchar.h>
 #include "paklib/PakInterface.h"
@@ -11,8 +11,8 @@
 
 extern "C"
 {
-#include "jpeg/jpeglib.h"
-#include "jpeg/jerror.h"
+#include "jpeglib.h"
+#include "jerror.h"
 }
 
 using namespace ImageLib;
@@ -124,7 +124,7 @@ Image* GetPNGImage(const std::string& theFileName)
 	png_set_bgr(png_ptr);
 
 //	int aNumBytes = png_get_rowbytes(png_ptr, info_ptr) * height / 4;
-    png_bytep row_pointers[height];
+    png_bytep *row_pointers = new png_bytep[height];
 	unsigned long* aBits = new unsigned long[width*height];
     for (uint i = 0; i < height; i++) {
         row_pointers[i] = (png_bytep)(aBits + i*width);
@@ -140,6 +140,8 @@ Image* GetPNGImage(const std::string& theFileName)
 
 	/* read rest of file, and get additional chunks in info_ptr - REQUIRED */
 	png_read_end(png_ptr, info_ptr);
+
+	delete[] row_pointers;
 
 	/* clean up after the read, and free any memory allocated - REQUIRED */
 	png_destroy_read_struct(&png_ptr, &info_ptr, (png_infopp)NULL);

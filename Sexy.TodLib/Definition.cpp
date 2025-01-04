@@ -6,7 +6,7 @@
 #include <stddef.h>
 #include "TodDebug.h"
 #include "Definition.h"
-#include "zlib/zlib.h"
+#include "zlib.h"
 #include "paklib/PakInterface.h"
 #include "misc/PerfTimer.h"
 #include "misc/XMLParser.h"

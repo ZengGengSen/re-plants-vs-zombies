@@ -1,0 +1,173 @@
+project('pvz', 'c', 'cpp',
+  version: '0.1',
+  default_options: ['warning_level=3', 'cpp_std=c++20'],
+  license: 'MIT')
+
+cpp = meson.get_compiler('cpp')
+
+pvz_sources = files([
+  'main.cpp',
+  'LawnApp.cpp',
+  'Resources.cpp',
+
+  'Lawn/Board.cpp',
+  'Lawn/Challenge.cpp',
+  'Lawn/Coin.cpp',
+  'Lawn/CursorObject.cpp',
+  'Lawn/CutScene.cpp',
+  'Lawn/GameObject.cpp',
+  'Lawn/GridItem.cpp',
+  'Lawn/LawnCommon.cpp',
+  'Lawn/LawnMower.cpp',
+  'Lawn/MessageWidget.cpp',
+  'Lawn/Plant.cpp',
+  'Lawn/Projectile.cpp',
+  'Lawn/SeedPacket.cpp',
+  'Lawn/ToolTipWidget.cpp',
+  'Lawn/ZenGarden.cpp',
+  'Lawn/Zombie.cpp',
+  
+  'Lawn/System/DataSync.cpp',
+  'Lawn/System/Music.cpp',
+  'Lawn/System/PlayerInfo.cpp',
+  'Lawn/System/PoolEffect.cpp',
+  'Lawn/System/PopDRMComm.cpp',
+  'Lawn/System/ProfileMgr.cpp',
+  'Lawn/System/ReanimationLawn.cpp',
+  'Lawn/System/SaveGame.cpp',
+  'Lawn/System/TypingCheck.cpp',
+
+  'Lawn/Widget/AchievementsScreen.cpp',
+  'Lawn/Widget/AlmanacDialog.cpp',
+  'Lawn/Widget/AwardScreen.cpp',
+  'Lawn/Widget/ChallengeScreen.cpp',
+  'Lawn/Widget/CheatDialog.cpp',
+  'Lawn/Widget/ContinueDialog.cpp',
+  'Lawn/Widget/CreditScreen.cpp',
+  'Lawn/Widget/GameButton.cpp',
+  'Lawn/Widget/GameSelector.cpp',
+  'Lawn/Widget/ImitaterDialog.cpp',
+  'Lawn/Widget/LawnDialog.cpp',
+  'Lawn/Widget/NewOptionsDialog.cpp',
+  'Lawn/Widget/NewUserDialog.cpp',
+  'Lawn/Widget/SeedChooserScreen.cpp',
+  'Lawn/Widget/StoreScreen.cpp',
+  'Lawn/Widget/TitleScreen.cpp',
+  'Lawn/Widget/UserDialog.cpp',
+
+  'Sexy.TodLib/Attachment.cpp',
+  'Sexy.TodLib/Definition.cpp',
+  'Sexy.TodLib/EffectSystem.cpp',
+  'Sexy.TodLib/FilterEffect.cpp',
+  'Sexy.TodLib/ReanimAtlas.cpp',
+  'Sexy.TodLib/Reanimator.cpp',
+  'Sexy.TodLib/TodCommon.cpp',
+  'Sexy.TodLib/TodDebug.cpp',
+  'Sexy.TodLib/TodFoley.cpp',
+  'Sexy.TodLib/TodList.cpp',
+  'Sexy.TodLib/TodParticle.cpp',
+  'Sexy.TodLib/TodStringFile.cpp',
+  'Sexy.TodLib/Trail.cpp',
+
+  'SexyAppFramework/Common.cpp',
+  'SexyAppFramework/SexyApp.cpp',
+  'SexyAppFramework/SexyAppBase.cpp',
+
+  'SexyAppFramework/imagelib/ImageLib.cpp',
+
+  'SexyAppFramework/graphics/Color.cpp',
+  'SexyAppFramework/graphics/D3D8Helper.cpp',
+  'SexyAppFramework/graphics/D3DInterface.cpp',
+  'SexyAppFramework/graphics/D3DTester.cpp',
+  'SexyAppFramework/graphics/DDImage.cpp',
+  'SexyAppFramework/graphics/DDInterface.cpp',
+  'SexyAppFramework/graphics/Font.cpp',
+  'SexyAppFramework/graphics/Graphics.cpp',
+  'SexyAppFramework/graphics/Image.cpp',
+  'SexyAppFramework/graphics/ImageFont.cpp',
+  'SexyAppFramework/graphics/MemoryImage.cpp',
+  'SexyAppFramework/graphics/NativeDisplay.cpp',
+  'SexyAppFramework/graphics/Quantize.cpp',
+  'SexyAppFramework/graphics/SharedImage.cpp',
+  'SexyAppFramework/graphics/SWTri.cpp',
+  'SexyAppFramework/graphics/SysFont.cpp',
+
+  'SexyAppFramework/misc/Buffer.cpp',
+  'SexyAppFramework/misc/CritSect.cpp',
+  'SexyAppFramework/misc/Debug.cpp',
+  'SexyAppFramework/misc/DescParser.cpp',
+  'SexyAppFramework/misc/DirectXErrorString.cpp',
+  #'SexyAppFramework/misc/Flags.cpp',
+  'SexyAppFramework/misc/HTTPTransfer.cpp',
+  'SexyAppFramework/misc/KeyCodes.cpp',
+  'SexyAppFramework/misc/MTRand.cpp',
+  'SexyAppFramework/misc/ModVal.cpp',
+  'SexyAppFramework/misc/PerfTimer.cpp',
+  'SexyAppFramework/misc/PropertiesParser.cpp',
+  'SexyAppFramework/misc/Ratio.cpp',
+  'SexyAppFramework/misc/ResourceManager.cpp',
+  'SexyAppFramework/misc/SEHCatcher.cpp',
+  'SexyAppFramework/misc/SexyMatrix.cpp',
+  'SexyAppFramework/misc/XMLParser.cpp',
+
+  'SexyAppFramework/ogg/bitwise.c',
+  'SexyAppFramework/ogg/block.c',
+  'SexyAppFramework/ogg/codebook.c',
+  'SexyAppFramework/ogg/floor0.c',
+  'SexyAppFramework/ogg/floor1.c',
+  'SexyAppFramework/ogg/framing.c',
+  'SexyAppFramework/ogg/info.c',
+  'SexyAppFramework/ogg/mapping0.c',
+  'SexyAppFramework/ogg/mdct.c',
+  'SexyAppFramework/ogg/registry.c',
+  'SexyAppFramework/ogg/res012.c',
+  'SexyAppFramework/ogg/sharedbook.c',
+  'SexyAppFramework/ogg/synthesis.c',
+  'SexyAppFramework/ogg/vorbisfile.c',
+  'SexyAppFramework/ogg/window.c',
+
+  #'SexyAppFramework/paklib/PakInterface.cpp',
+
+  'SexyAppFramework/sound/BassLoader.cpp',
+  'SexyAppFramework/sound/BassMusicInterface.cpp',
+  'SexyAppFramework/sound/DSoundInstance.cpp',
+  'SexyAppFramework/sound/DSoundManager.cpp',
+  'SexyAppFramework/sound/FModLoader.cpp',
+  'SexyAppFramework/sound/FModMusicInterface.cpp',
+  #'SexyAppFramework/sound/FModSoundInstance.cpp',
+  #'SexyAppFramework/sound/FModSoundManager.cpp',
+
+  'SexyAppFramework/widget/ButtonWidget.cpp',
+  'SexyAppFramework/widget/Checkbox.cpp',
+  'SexyAppFramework/widget/Dialog.cpp',
+  'SexyAppFramework/widget/DialogButton.cpp',
+  'SexyAppFramework/widget/EditWidget.cpp',
+  'SexyAppFramework/widget/HyperlinkWidget.cpp',
+  'SexyAppFramework/widget/Insets.cpp',
+  'SexyAppFramework/widget/ListWidget.cpp',
+  #'SexyAppFramework/widget/ScrollbarWidget.cpp',
+  #'SexyAppFramework/widget/ScrollbuttonWidget.cpp',
+  'SexyAppFramework/widget/Slider.cpp',
+  #'SexyAppFramework/widget/TextWidget.cpp',
+  'SexyAppFramework/widget/Widget.cpp',
+  'SexyAppFramework/widget/WidgetContainer.cpp',
+  'SexyAppFramework/widget/WidgetManager.cpp',
+])
+
+pvz_includes = []
+pvz_includes += include_directories('SexyAppFramework')
+
+pvz_deps = []
+pvz_deps += cpp.find_library('dxguid')
+pvz_deps += cpp.find_library('winmm')
+pvz_deps += cpp.find_library('ws2_32')
+pvz_deps += dependency('PNG', method: 'cmake')
+pvz_deps += dependency('JPEG', method: 'cmake')
+
+windows = import('windows')
+pvz_sources += windows.compile_resources('SexyAppFramework/LawnProject.rc')
+
+executable('pvz', pvz_sources,
+  include_directories: pvz_includes,
+  dependencies: pvz_deps,
+)

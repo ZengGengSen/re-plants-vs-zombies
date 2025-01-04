@@ -82,6 +82,7 @@ void TodAssertFailed(const char* theCondition, const char* theFile, int theLine,
 		gInAssert = true;
 		LPEXCEPTION_POINTERS exp;
 
+#if MSC_VER
 		__try
 		{
 			RaiseException(EXCEPTION_NONCONTINUABLE_EXCEPTION, NULL, NULL, NULL);
@@ -90,6 +91,8 @@ void TodAssertFailed(const char* theCondition, const char* theFile, int theLine,
 		{
 			TodReportError(exp, aFormattedMsg);
 		}
+#else
+#endif
 
 		gInAssert = false;
 		exit(0);
@@ -191,7 +194,7 @@ void TodTraceAndLog(const char* theFormat, ...)
 
 void TodTraceWithoutSpamming(const char* theFormat, ...)
 {
-	static __time64_t gLastTraceTime = 0i64;
+	static __time64_t gLastTraceTime = 0l;
 	__time64_t aTime = _time64(nullptr);
 	if (aTime < gLastTraceTime)
 	{
