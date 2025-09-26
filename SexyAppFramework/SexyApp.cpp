@@ -3,6 +3,7 @@
 //#include "..\Crypt\RegKey.h"
 #include "misc/SEHCatcher.h"
 //#include "InternetManager.h"
+#include "misc/NetworkManager.h"
 #include <time.h>
 #include <fstream>
 #include <direct.h>
@@ -43,6 +44,7 @@ SexyApp::SexyApp()
 
 	mInternetManager = nullptr;//new InternetManager();
 	mBetaSupport = NULL;
+	mNetworkManager = new NetworkManager();
 	mBetaValidate = false;	
 
 	SetString("UPDATE_CHECK_BODY", L"Contacting PopCap.com to determine if there are any updates available for this product ...");
@@ -59,6 +61,7 @@ SexyApp::~SexyApp()
 {
 	//delete mBetaSupport;
 	//delete mInternetManager;
+	delete mNetworkManager;
 }
 
 /*
@@ -633,6 +636,21 @@ void SexyApp::UpdateFrames()
 	SexyAppBase::UpdateFrames();
 
 	//mInternetManager->Update();
+	if (mNetworkManager)
+		mNetworkManager->Update();
+}
+
+bool SexyApp::IsNetworkConnected()
+{
+	if (mNetworkManager)
+		return mNetworkManager->IsConnected();
+	return false;
+}
+
+void SexyApp::CheckNetworkConnection()
+{
+	if (mNetworkManager)
+		mNetworkManager->ForceCheck();
 }
 
 #ifdef ZYLOM

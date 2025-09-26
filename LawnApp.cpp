@@ -1173,6 +1173,11 @@ bool LawnApp::NeedPauseGame()
 	return (mBoard == nullptr || mGameMode != GameMode::GAMEMODE_CHALLENGE_ZEN_GARDEN) && (mBoard == nullptr || mGameMode != GameMode::GAMEMODE_TREE_OF_WISDOM);
 }
 
+bool LawnApp::IsNetworkAvailable()
+{
+	return IsNetworkConnected();
+}
+
 //0x451780
 void LawnApp::ModalOpen()
 {

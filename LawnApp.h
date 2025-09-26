@@ -211,6 +211,7 @@ public:
 	bool							IsContinuousChallenge();
 	/*inline*/ bool					IsArtChallenge();
 	bool							NeedPauseGame();
+	bool							IsNetworkAvailable();  // Network connectivity check
 	virtual void					ShowResourceError(bool doExit = false);
 	void							ToggleSlowMo();
 	void							ToggleFastMo();

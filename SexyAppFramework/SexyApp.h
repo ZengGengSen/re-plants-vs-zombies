@@ -8,12 +8,14 @@ namespace Sexy
 
 class InternetManager;
 class BetaSupport;
+class NetworkManager;
 
 class SexyApp : public SexyAppBase
 {
 public:	
 	InternetManager*		mInternetManager;
 	BetaSupport*			mBetaSupport;
+	NetworkManager*			mNetworkManager;
 
 	std::string				mBetaSupportSiteOverride;
 	std::string				mBetaSupportProdNameOverride;
@@ -75,6 +77,10 @@ public:
 	virtual void			HandleCmdLineParam(const std::string& theParamName, const std::string& theParamValue);
 	virtual std::string		GetGameSEHInfo();
 	virtual void			GetSEHWebParams(DefinesMap* theDefinesMap);
+
+	// Network connectivity methods
+	bool					IsNetworkConnected();
+	void					CheckNetworkConnection();
 
 #ifdef ZYLOM
 	bool					ZylomUpdateCheckNeeded();	
